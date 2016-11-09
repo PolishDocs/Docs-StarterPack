@@ -1,0 +1,9 @@
+<h2 id="introduction">Underscore.js</h2><div class="section"><p>Underscore is a JavaScript library that provides a whole mess of useful functional programming helpers without extending any built-in objects. It’s the answer to the question: “If I sit down in front of a blank HTML page, and want to start being productive immediately, what do I need?” …and the tie to go along with jQuery's tux and Backbone's suspenders.</p></div><h4>Collection Functions (Arrays or Objects)</h4><div class="section" id="each"><h5>each</h5><div class="info"><pre><code>_.each(list, iteratee, [context]);</code></pre><span class="alias"><em>(Alias:&nbsp;<strong>forEach</strong>)</em></span></div><p>Iterates over a list of elements, yielding each in turn to an iteratee function. The iteratee is bound to the context object, if one is passed. Each invocation of iteratee is called with three arguments: (element, index, list). If list is a JavaScript object, iteratee's arguments will be (value, key, list). Returns the list for chaining.</p><pre><code>_.each([1, 2, 3], alert);
+// alerts each number in turn… 
+_.each({one: 1, two: 2, three: 3}, alert);
+// alerts each number value in turn…</code></pre></div><div class="section" id="map"><h5>map</h5><div class="info"><pre><code>_.map(list, iteratee, [context]);</code></pre><span class="alias"><em>(Alias:&nbsp;<strong>collect</strong>)</em></span></div><p>Produces a new array of values by mapping each value in list through a transformation function (iteratee). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire list.</p><pre><code>_.map([1, 2, 3], function(num){ return num * 3; });
+// returns [3, 6, 9] 
+_.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
+// returns [3, 6, 9] 
+_.map([[1, 2], [3, 4]], _.first);
+// returns [1, 3]</code></pre></div>

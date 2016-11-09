@@ -1,0 +1,97 @@
+include options/options.pug
+
+doctype html
+head
+  meta(charset="utf-8")
+  meta(name='viewport', content='width=device-width, initial-scale=1')
+  title #{options.title}
+  link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+  link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto+Mono")
+  link(rel="stylesheet", href=("https://code.getmdl.io/1.2.1/material."+options.colorPrimary+"-"+options.colorSecondary+".min.css"))
+  link(rel="stylesheet", href="https://getmdl.io/assets/prism-default.css")
+  link(rel="stylesheet", href="./css/style.min.css")
+
+body.language-javascript
+  .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+      header.mdl-layout__header
+        .mdl-layout__header-row
+          span.mdl-layout-title.mdl-cell--hide-phone #{options.title}
+          .mdl-layout__header-input-cont
+            .mdl-layout__header-input.mdl-textfield.mdl-js-textfield
+              i.material-icons search
+              input.mdl-textfield__input(type="text", placeholder="Szukaj")
+
+            .mdl-layout__header--search-results-container
+              .mdl-layout__header--search-results
+                a(href="#each")
+                  p: strong each
+                  p Iterates over a list of elements, yielding each in turn to an iteratee function.
+                a(href="#map")
+                  p: strong map
+                  p Produces a new array of values by mapping each value in list through a transformation function (iteratee).
+
+
+      .mdl-layout__drawer
+        span.mdl-layout-title
+          | #{options.title}
+          - if( options.version !== false )
+            |  (#{options.version})
+
+        nav.mdl-navigation
+          ul.mdl-navigation__ul
+            li: a.mdl-navigation__link.mdl-navigation__header(href='#introduction') Introduction
+
+            li
+              a.mdl-navigation__link.mdl-navigation__header(href='#collections') Collections
+              ul.mdl-navigation__ul-sub
+                li: a.mdl-navigation__link(href='#each') each
+                li: a.mdl-navigation__link(href='#map') map
+                li: a.mdl-navigation__link(href='') reduce
+                li: a.mdl-navigation__link(href='') reduceRight
+                li: a.mdl-navigation__link(href='') find
+                li: a.mdl-navigation__link(href='') filter
+                li: a.mdl-navigation__link(href='') where
+                li: a.mdl-navigation__link(href='') findWhere
+                li: a.mdl-navigation__link(href='') reject
+                li: a.mdl-navigation__link(href='') every
+                li: a.mdl-navigation__link(href='') some
+                li: a.mdl-navigation__link(href='') contains
+                li: a.mdl-navigation__link(href='') invoke
+                li: a.mdl-navigation__link(href='') pluck
+                li: a.mdl-navigation__link(href='') max
+                li: a.mdl-navigation__link(href='') min
+                li: a.mdl-navigation__link(href='') sortBy
+                li: a.mdl-navigation__link(href='') groupBy
+                li: a.mdl-navigation__link(href='') indexBy
+                li: a.mdl-navigation__link(href='') countBy
+                li: a.mdl-navigation__link(href='') shuffle
+                li: a.mdl-navigation__link(href='') sample
+                li: a.mdl-navigation__link(href='') toArray
+                li: a.mdl-navigation__link(href='') size
+                li: a.mdl-navigation__link(href='') partition
+
+            li: a.mdl-navigation__link.mdl-navigation__header(href='#arrays') Arrays
+
+        footer.mdl-footer
+          span
+            a(href="https://github.com/PolishDocs") PolishDocs
+            | &nbsp;&copy;
+            br
+            //- a(href=options.licenseUrl) Licencja
+            | &nbsp;|&nbsp;
+            //- a(href=options.libUrl) Underscore.js
+
+
+      main.mdl-layout__content
+        .page-content
+          .mdl-grid
+            .mdl-cell.mdl-cell--8-col-desktop.mdl-cell--2-offset-desktop.mdl-cell--6-col-tablet.mdl-cell--1-offset-tablet.mdl-cell--4-col-phone#app
+
+
+
+
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js", charset="utf-8")
+  script(src="http://prismjs.com/prism.js", charset="utf-8")
+  script(src="./dist/js/app.min.js", charset="utf-8")
+  script(src="https://code.getmdl.io/1.2.1/material.min.js", charset="utf-8")
+  script(src="./dist/js/script.min.js", charset="utf-8")

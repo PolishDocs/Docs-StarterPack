@@ -1,0 +1,36 @@
+{
+	"pages": [
+		{
+			"url": "/",
+			"chapters": [
+				{
+					"id": "introduction",
+					"title": "Introduction",
+					"link": "#introduction",
+					"urlToDownload": "http://example.com/test.html",
+					"subchapters": [],
+				},
+				{
+					"id": "collections",
+					"title": "Collections",
+					"link": "#collections",
+					"urlToDownload": "http://example.com/test2.html",
+					"subchapters": [
+						{
+							"id": "each",
+							"title": "each",
+							"link": "#each",
+							"urlToDownload": "http://example.com/test3.html",
+						},
+						{
+							"id": "map",
+							"title": "map",
+							"link": "#map",
+							"urlToDownload": "http://example.com/test4.html",
+						},
+					],
+				},
+			],
+		},
+	],
+}
