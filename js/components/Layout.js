@@ -19,7 +19,7 @@ export default class Layout extends React.Component {
   createMarkup() {
     $.ajax({
       method: "GET",
-      url: "/main.html",
+      url: "./pages/index/main.html",
     })
     .done(( html ) => {
       this.setState( { html } );
