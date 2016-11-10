@@ -1,1 +1,0 @@
-# PolishDocs Starter pack

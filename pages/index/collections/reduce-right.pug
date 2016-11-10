@@ -1,0 +1,14 @@
+h5 reduceRight
+.info
+  pre: code _.reduceRight(list, iteratee, [memo], [context]);
+  span.alias: em
+    | (Alias:&nbsp;
+    strong foldr
+    |)
+p The right-associative version of reduce. Foldr is not as useful in JavaScript as it would be in a language with lazy evaluation.
+
+pre
+  code
+    | var list = [[0, 1], [2, 3], [4, 5]];
+    | var flat = _.reduceRight(list, function(a, b) { return a.concat(b); }, []);
+    | // returns [4, 5, 2, 3, 0, 1]
