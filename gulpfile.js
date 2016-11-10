@@ -14,7 +14,7 @@ gulp.task("pug", () => {
   return gulp.src(["./*.pug"])
     .pipe(
       pug({
-        "pretty": true,
+        "pretty": false,
       })
     )
     .pipe(gulp.dest("./"))
@@ -45,4 +45,4 @@ gulp.task("watch-pages", () => {
 
 gulp.task("default", ["pages"]);
 
-gulp.task("pages", ["pug-pages", "markdown-pages", "watch-pages"]);
+gulp.task("pages", ["pug", "pug-pages", "markdown-pages", "watch-pages"]);
