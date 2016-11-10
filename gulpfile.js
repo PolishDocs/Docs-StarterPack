@@ -3,6 +3,7 @@ const gulp = require("gulp");
 const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");
 const pug = require("gulp-pug");
+const markdown = require("gulp-markdown");
 const argv = require("yargs").argv;
 const rename = require("gulp-rename");
 const filter = require("gulp-filter");
@@ -57,6 +58,12 @@ sO.snippetOptions.rule.fn = function() {
   return `<link rel='stylesheet' href='${browserSyncClientUrl}browser-sync-client-transition/browser-sync-client.min.css' /><script async src='${browserSyncClientUrl}browser-sync-client-transition/browser-sync-client.min.js'></script>`;
 };
 
+
+const renderer = new markdown.marked.Renderer();
+renderer.heading = (text, level) => {
+  return `<h${level}>${text}</h${level}>`;
+};
+
 gulp.task("browserSync", () => {
   browserSync.init(sO);
 });
@@ -90,6 +97,7 @@ gulp.task("pug", () => {
     );
 });
 
+
 gulp.task("pug-pages", () => {
   return gulp.src(["./pages/**/*.pug"])
     .pipe(
@@ -97,6 +105,15 @@ gulp.task("pug-pages", () => {
         "pretty": !dist,
       })
     )
+    .pipe(gulp.dest("./pages/"))
+    .pipe(
+      browserSync.stream()
+    );
+});
+
+gulp.task("markdown-pages", () => {
+  return gulp.src(["./pages/**/*.md"])
+    .pipe(markdown({ renderer }))
     .pipe(gulp.dest("./pages/"))
     .pipe(
       browserSync.stream()
@@ -136,8 +153,17 @@ gulp.task("watch", ["browserSync", "sass"], () => {
   watch("./sass/**/*.sass", () => { gulp.start("sass"); });
   watch("./*.pug", () => { gulp.start("pug"); });
   watch("./pages/**/*.pug", () => { gulp.start("pug-pages"); });
+  watch("./pages/**/*.md", () => { gulp.start("markdown-pages"); });
   watch(["./js/**/*.js", "!./js/**/*.min.js"], () => { gulp.start("js"); });
   watch(["./*.html", "./*.php"], () => { browserSync.reload(); });
 });
 
-gulp.task("default", ["browserSync", "sass", "pug", "pug-pages", "js", "watch"]);
+gulp.task("watch-pages", () => {
+  watch("./pages/**/*.pug", () => { gulp.start("pug-pages"); });
+  watch("./*.pug", () => { gulp.start("pug"); });
+  watch("./pages/**/*.md", () => { gulp.start("markdown-pages"); });
+});
+
+gulp.task("default", ["browserSync", "sass", "pug", "pug-pages", "markdown-pages", "js", "watch"]);
+
+gulp.task("pages", ["pug-pages", "markdown-pages", "watch-pages"]);
