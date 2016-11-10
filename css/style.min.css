@@ -498,11 +498,9 @@ code[class*='language-'], pre[class*='language-'] {
       display: none;
       margin: 0;
       padding: 0; }
-    .mdl-layout__drawer .mdl-navigation .mdl-navigation__ul .mdl-navigation__link {
-      padding: 4px 0 4px 32px;
-      font-size: 13px; }
-      .mdl-layout__drawer .mdl-navigation .mdl-navigation__ul .mdl-navigation__link.current {
-        color: #00bcd4; }
+      .mdl-layout__drawer .mdl-navigation .mdl-navigation__ul ul.mdl-navigation__ul-sub .mdl-navigation__link {
+        padding: 4px 0 4px 32px;
+        font-size: 13px; }
 
 .mdl-layout__drawer footer.mdl-footer {
   padding: 1em;
@@ -613,9 +611,9 @@ code[class*='language-'], pre[class*='language-'] {
 h2, h3 {
   margin: 8px 0; }
 
-.section {
+.section-subchapter {
   padding: 16px 0 32px; }
-  .section h5 {
+  .section-subchapter h5 {
     margin: 0;
     font-weight: bold; }
 

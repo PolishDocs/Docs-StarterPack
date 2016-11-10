@@ -7,26 +7,26 @@
 					"id": "introduction",
 					"title": "Introduction",
 					"link": "#introduction",
-					"urlToDownload": "../pages/index/intro.html",
+					"urlToDownload": "/pages/index/intro.html",
 					"subchapters": []
 				},
 				{
 					"id": "collections",
 					"title": "Collections",
 					"link": "#collections",
-					"urlToDownload": "../pages/index/collections.html",
+					"urlToDownload": "/pages/index/collections.html",
 					"subchapters": [
 						{
 							"id": "each",
 							"title": "each",
 							"link": "#each",
-							"urlToDownload": "../pages/index/collections/each.html"
+							"urlToDownload": "/pages/index/collections/each.html"
 						},
 						{
 							"id": "map",
 							"title": "map",
 							"link": "#map",
-							"urlToDownload": "../pages/index/collections/map.html"
+							"urlToDownload": "/pages/index/collections/map.html"
 						}
 					]
 				}

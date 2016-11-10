@@ -14,16 +14,23 @@ class PagesStore extends EventEmitter {
     $.ajax({
       dataType: "json",
       method: "GET",
-      url: "../../options/config.json",
+      url: "/options/config.json",
+      beforeSend: (xhr, settings) => {
+        xhr.url = settings.url; // eslint-disable-line no-param-reassign
+      },
     })
     .done(( json ) => {
       this.pages = json;
       this.emit("change");
     })
     .fail((xhr, ajaxOptions, thrownError) => {
-      this.pages = {};
-      console.log( xhr.status );
-      console.log( thrownError );
+      this.pages = {
+        pages: [],
+      };
+      if ( xhr.status !== 404 ) {
+        const url = `${window.location.origin}${xhr.url.replace(/^\.\//, "")}`;
+        console.error( `GET ${url} ${xhr.status} (${thrownError})` );
+      }
     });
   }
 
@@ -37,6 +44,9 @@ class PagesStore extends EventEmitter {
             dataType: "html",
             method: "GET",
             url: chapter.urlToDownload,
+            beforeSend: (xhr, settings) => {
+              xhr.url = settings.url; // eslint-disable-line no-param-reassign
+            },
           })
           .done(( html ) => {
             chapter.isDownloaded = true;
@@ -44,9 +54,11 @@ class PagesStore extends EventEmitter {
             this.emit("change");
           })
           .fail((xhr, ajaxOptions, thrownError) => {
-            this.pages = {};
-            console.log( xhr.status );
-            console.log( thrownError );
+            chapter.isDownloaded = false;
+            if ( xhr.status !== 404 ) {
+              const url = `${window.location.origin}${xhr.url.replace(/^\.\//, "")}`;
+              console.error( `GET ${url} ${xhr.status} (${thrownError})` );
+            }
           });
 
           if ( chapter.subchapters.length > 0 ) {
@@ -56,6 +68,9 @@ class PagesStore extends EventEmitter {
                 dataType: "html",
                 method: "GET",
                 url: subchapter.urlToDownload,
+                beforeSend: (xhr, settings) => {
+                  xhr.url = settings.url; // eslint-disable-line no-param-reassign
+                },
               })
               .done(( html ) => {
                 subchapter.isDownloaded = true;
@@ -63,9 +78,11 @@ class PagesStore extends EventEmitter {
                 this.emit("change");
               })
               .fail((xhr, ajaxOptions, thrownError) => {
-                this.pages = {};
-                console.log( xhr.status );
-                console.log( thrownError );
+                subchapter.isDownloaded = false;
+                if ( xhr.status !== 404 ) {
+                  const url = `${window.location.origin}${xhr.url.replace(/^\.\//, "")}`;
+                  console.error( `GET ${url} ${xhr.status} (${thrownError})` );
+                }
               });
             }
           }
@@ -75,9 +92,12 @@ class PagesStore extends EventEmitter {
   }
 
   getPage() {
-    const page = this.pages.pages[0];
-    this.downloadPages(page);
-    return page;
+    if ( this.pages.pages.length > 0 ) {
+      const page = this.pages.pages[0];
+      this.downloadPages(page);
+      return page;
+    }
+    return {};
   }
 
   handleActions() {

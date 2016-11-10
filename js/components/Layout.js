@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from "react";
 import PagesStore from "../stores/PagesStore";
 
@@ -35,16 +36,16 @@ export default class Layout extends React.Component {
   createMarkup() {
     const html = [];
     const page = this.state.page;
-    if ( typeof page !== "undefined" ) {
+    if ( typeof page.chapters !== "undefined" ) {
       for (let i = 0; i < page.chapters.length; i++) {
         const chapter = page.chapters[i];
         if ( chapter.isDownloaded === true ) {
-          html.push( chapter.downloadedHTML );
+          html.push( <div className="section" id={chapter.id} key={chapter.id} dangerouslySetInnerHTML={{ __html: chapter.downloadedHTML }} /> );
           if ( chapter.subchapters.length > 0 ) {
             for (let j = 0; j < chapter.subchapters.length; j++) {
               const subchapter = chapter.subchapters[j];
               if ( subchapter.isDownloaded === true ) {
-                html.push( subchapter.downloadedHTML );
+                html.push( <div className="section-subchapter" id={subchapter.id} key={subchapter.id} dangerouslySetInnerHTML={{ __html: subchapter.downloadedHTML }} /> );
               }
             }
           }
@@ -52,16 +53,18 @@ export default class Layout extends React.Component {
       }
     }
 
-    return html.join("");
+    return html;
   }
 
   returnMarkup() {
-    return { __html: this.createMarkup() };
+    return this.createMarkup();
   }
 
   render() {
     return (
-      <div dangerouslySetInnerHTML={this.returnMarkup()} />
+      <div>
+        { this.returnMarkup() }
+      </div>
     );
   }
 }
