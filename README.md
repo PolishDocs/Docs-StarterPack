@@ -90,3 +90,6 @@ Dostępne kolory (z https://getmdl.io/customize/):
   + brown: ![#795548](http://i.imgur.com/BLDSPrO.png) (tylko jako kolor podstawowy)
   + blue_grey: ![#607d8b](http://i.imgur.com/t3jdslL.png) (tylko jako kolor podstawowy)
   + grey: ![#9e9e9e](http://i.imgur.com/6K2miXC.png) (tylko jako kolor podstawowy)
+
+## Do zrobienia
+[Trello projektu](https://trello.com/b/DOPyYGgi/starterpack)
