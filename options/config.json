@@ -4,35 +4,22 @@
 			"url": "/",
 			"chapters": [
 				{
-					"id": "introduction",
-					"title": "Introduction",
-					"link": "#introduction",
-					"urlToDownload": "/pages/index/intro.html",
-					"subchapters": []
-				},
-				{
-					"id": "collections",
-					"title": "Collections",
-					"link": "#collections",
-					"urlToDownload": "/pages/index/collections.html",
+					"id": "start",
+					"title": "PolishDocs Starterpack",
+					"link": "#start",
+					"urlToDownload": "/pages/index/start.html",
 					"subchapters": [
 						{
-							"id": "each",
-							"title": "each",
-							"link": "#each",
-							"urlToDownload": "/pages/index/collections/each.html"
+							"id": "whatis",
+							"title": "Co to jest?",
+							"link": "#whatis",
+							"urlToDownload": "/pages/index/whatis.html"
 						},
 						{
-							"id": "map",
-							"title": "map",
-							"link": "#map",
-							"urlToDownload": "/pages/index/collections/map.html"
-						},
-						{
-							"id": "reduceRight",
-							"title": "reduceRight",
-							"link": "#reduceRight",
-							"urlToDownload": "/pages/index/collections/reduce-right.html"
+							"id": "wheretostart",
+							"title": "Od czego zacząć",
+							"link": "#wheretostart",
+							"urlToDownload": "/pages/index/wheretostart.html"
 						}
 					]
 				}
