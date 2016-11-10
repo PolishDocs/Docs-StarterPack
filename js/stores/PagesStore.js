@@ -100,6 +100,42 @@ class PagesStore extends EventEmitter {
     return {};
   }
 
+  getChapters() {
+    const toRet = {
+      pages: [],
+    };
+
+    this.pages.pages.forEach((value) => {
+      const chapters = {
+        url: value.url,
+        chapters: [],
+      };
+
+      value.chapters.forEach((originalChapter) => {
+        const chapter = {
+          id: originalChapter.id,
+          link: originalChapter.link,
+          title: originalChapter.title,
+          subchapters: [],
+        };
+
+        originalChapter.subchapters.forEach((originalSubchapter) => {
+          chapter.subchapters.push({
+            id: originalSubchapter.id,
+            link: originalSubchapter.link,
+            title: originalSubchapter.title,
+          });
+        });
+
+        chapters.chapters.push(chapter);
+      });
+
+      toRet.pages.push(chapters);
+    });
+
+    return toRet;
+  }
+
   handleActions() {
 
   }
@@ -107,5 +143,7 @@ class PagesStore extends EventEmitter {
 
 const pagesStore = new PagesStore();
 dispatcher.register(pagesStore.handleActions.bind(pagesStore));
+
+window.storage = pagesStore;
 
 export default pagesStore;

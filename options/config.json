@@ -27,6 +27,12 @@
 							"title": "map",
 							"link": "#map",
 							"urlToDownload": "/pages/index/collections/map.html"
+						},
+						{
+							"id": "reduceRight",
+							"title": "reduceRight",
+							"link": "#reduceRight",
+							"urlToDownload": "/pages/index/collections/reduce-right.html"
 						}
 					]
 				}

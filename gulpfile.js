@@ -1,3 +1,4 @@
+"use strict"; // eslint-disable-line
 const gulp = require("gulp");
 const sass = require("gulp-sass");
 const autoprefixer = require("gulp-autoprefixer");

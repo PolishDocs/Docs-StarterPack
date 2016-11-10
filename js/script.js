@@ -1,14 +1,3 @@
-$(".mdl-navigation__header, .mdl-navigation__link").click(function(e) {
-  const sub = $(this).parent().find(".mdl-navigation__ul-sub");
-  if ( sub.length ) {
-    e.preventDefault();
-    sub.slideToggle();
-  } else {
-    const layout = document.querySelector(".mdl-layout");
-    layout.MaterialLayout.toggleDrawer();
-  }
-});
-
 let linkClicked = false;
 
 $(".mdl-layout__header--search-results a").click(() => {

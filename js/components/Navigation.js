@@ -4,22 +4,36 @@ import PagesStore from "../stores/PagesStore";
 import LiHeader from "../components/Navigation/LiHeader";
 
 export default class Navigation extends React.Component {
-  render() {
-    const subchapters = [
-      {
-        text: "each",
-        href: "each",
-      },
-      {
-        text: "map",
-        href: "map",
-      },
-    ];
+  constructor() {
+    super();
+    this.refreshPage = this.refreshPage.bind(this);
+    this.state = PagesStore.getChapters();
+  }
 
-    const lis = [
-      (<LiHeader text="Introduction" href="introduction" key="introduction" />),
-      (<LiHeader text="Collections" href="collections" key="collections" subchapters={subchapters} />),
-    ];
+  componentWillMount() {
+    PagesStore.on("change", this.refreshPage);
+
+    PagesStore.loadPages();
+  }
+
+  componentWillUnmount() {
+    PagesStore.removeListener("change", this.refreshPage);
+  }
+
+  refreshPage() {
+    this.setState(PagesStore.getChapters());
+  }
+
+  render() {
+    const lis = [];
+
+    if ( typeof this.state.pages !== "undefined" ) {
+      this.state.pages.forEach((page) => {
+        page.chapters.forEach((chapter) => {
+          lis.push(<LiHeader title={chapter.title} link={chapter.link} key={chapter.id} subchapters={chapter.subchapters} />);
+        });
+      });
+    }
 
     return (
       <ul className="mdl-navigation__ul">

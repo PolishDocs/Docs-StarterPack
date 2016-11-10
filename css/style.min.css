@@ -522,6 +522,7 @@ code[class*='language-'], pre[class*='language-'] {
     margin-top: 3px; } }
 
 .mdl-layout__header-input-cont {
+  display: none;
   position: relative;
   flex: 1;
   height: 100%;
@@ -572,16 +573,21 @@ code[class*='language-'], pre[class*='language-'] {
   margin: 0 -10px;
   margin-top: -1px;
   padding: 0 10px 10px;
-  overflow: hidden; }
+  transition: visibility 0s .2s;
+  overflow: hidden;
+  visibility: hidden; }
   @media screen and (max-width: 479px) {
     .mdl-layout__header--search-results-container {
       right: 0;
       left: 0; } }
-  .mdl-layout__header-input.is-dirty.links-visible ~ .mdl-layout__header--search-results-container .mdl-layout__header--search-results {
-    transform: translateY(0);
-    transition: opacity .2s ease-in-out, transform .2s ease-in-out, visibility 0s;
-    opacity: 1;
+  .mdl-layout__header-input.is-dirty.links-visible ~ .mdl-layout__header--search-results-container {
+    transition: visibility 0s;
     visibility: visible; }
+    .mdl-layout__header-input.is-dirty.links-visible ~ .mdl-layout__header--search-results-container .mdl-layout__header--search-results {
+      transform: translateY(0);
+      transition: opacity .2s ease-in-out, transform .2s ease-in-out, visibility 0s;
+      opacity: 1;
+      visibility: visible; }
   .mdl-layout__header--search-results-container .mdl-layout__header--search-results {
     transform: translateY(-100%);
     transition: opacity .2s ease-in-out, transform .2s ease-in-out, visibility 0s .2s;
