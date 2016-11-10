@@ -2,7 +2,6 @@
   "name": "PolishDocs-StarterPack",
   "version": "1.0.0",
   "description": "Starter pack for docs for PolishDocs.",
-  "main": "index.js",
   "scripts": {
     "start": "gulp"
   },
@@ -11,6 +10,8 @@
     "url": "https://github.com/PolishDocs/Docs-StarterPack/"
   },
   "author": "PolishDocs",
+  "license": "MIT",
+  "author": "bibixx",
   "license": "MIT",
   "dependencies": {
     "babel-preset-es2015": "^6.16.0",

@@ -1,13 +1,19 @@
 import React from "react";
+import PagesStore from "../stores/PagesStore";
 
 export default class Layout extends React.Component {
   constructor() {
     super();
+    this.refreshPage = this.refreshPage.bind(this);
     this.state = {
-      html: {},
+      page: PagesStore.getPage(),
     };
+  }
 
-    this.createMarkup();
+  componentWillMount() {
+    PagesStore.on("change", this.refreshPage);
+
+    PagesStore.loadPages();
   }
 
   componentDidUpdate() {
@@ -16,21 +22,41 @@ export default class Layout extends React.Component {
     });
   }
 
-  createMarkup() {
-    $.ajax({
-      method: "GET",
-      url: "./pages/index/main.html",
-    })
-    .done(( html ) => {
-      this.setState( { html } );
-    })
-    .fail(() => {
-      console.log( "" );
+  componentWillUnmount() {
+    PagesStore.removeListener("change", this.refreshPage);
+  }
+
+  refreshPage() {
+    this.setState({
+      page: PagesStore.getPage(),
     });
   }
 
+  createMarkup() {
+    const html = [];
+    const page = this.state.page;
+    if ( typeof page !== "undefined" ) {
+      for (let i = 0; i < page.chapters.length; i++) {
+        const chapter = page.chapters[i];
+        if ( chapter.isDownloaded === true ) {
+          html.push( chapter.downloadedHTML );
+          if ( chapter.subchapters.length > 0 ) {
+            for (let j = 0; j < chapter.subchapters.length; j++) {
+              const subchapter = chapter.subchapters[j];
+              if ( subchapter.isDownloaded === true ) {
+                html.push( subchapter.downloadedHTML );
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return html.join("");
+  }
+
   returnMarkup() {
-    return { __html: this.state.html };
+    return { __html: this.createMarkup() };
   }
 
   render() {

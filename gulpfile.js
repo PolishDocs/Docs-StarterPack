@@ -77,13 +77,26 @@ gulp.task("sass", () => {
 });
 
 gulp.task("pug", () => {
-  return gulp.src("./*.pug")
+  return gulp.src(["./*.pug"])
     .pipe(
       pug({
         "pretty": !dist,
       })
     )
     .pipe(gulp.dest("./"))
+    .pipe(
+      browserSync.stream()
+    );
+});
+
+gulp.task("pug-pages", () => {
+  return gulp.src(["./pages/**/*.pug"])
+    .pipe(
+      pug({
+        "pretty": !dist,
+      })
+    )
+    .pipe(gulp.dest("./pages/"))
     .pipe(
       browserSync.stream()
     );
@@ -97,7 +110,7 @@ gulp.task("js", () => {
 
   const tasks = files.map((entry) => {
     const filename = entry.split("/").pop();
-    return browserify({ entries: [entry] })
+    return browserify({ entries: [entry], debug: true })
       .transform("babelify", { presets: ["es2015", "react"] })
       .bundle()
       .pipe(source(filename))
@@ -105,7 +118,7 @@ gulp.task("js", () => {
       .pipe(rename({
         suffix: ".min",
       }))
-      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(uglify())
       .pipe(sourcemaps.write("./"))
       .pipe(gulp.dest("./dist/js"))
@@ -121,8 +134,9 @@ gulp.task("js", () => {
 gulp.task("watch", ["browserSync", "sass"], () => {
   watch("./sass/**/*.sass", () => { gulp.start("sass"); });
   watch("./*.pug", () => { gulp.start("pug"); });
+  watch("./pages/**/*.pug", () => { gulp.start("pug-pages"); });
   watch(["./js/**/*.js", "!./js/**/*.min.js"], () => { gulp.start("js"); });
   watch(["./*.html", "./*.php"], () => { browserSync.reload(); });
 });
 
-gulp.task("default", ["browserSync", "sass", "pug", "js", "watch"]);
+gulp.task("default", ["browserSync", "sass", "pug", "pug-pages", "js", "watch"]);
