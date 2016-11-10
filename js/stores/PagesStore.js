@@ -11,7 +11,6 @@ class PagesStore extends EventEmitter {
   }
 
   loadPages() {
-    console.log( window.location.origin + window.location.pathname );
     $.ajax({
       dataType: "json",
       method: "GET",
