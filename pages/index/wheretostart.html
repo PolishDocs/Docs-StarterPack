@@ -1,0 +1,25 @@
+<h5>Od czego zacząć</h5><ol>
+<li><p>Sklonuj repozytorium jako nowe, czyste repozytorium.</p>
+<pre><code class="lang-git">$ git clone --mirror https://github.com/PolishDocs/Docs-StarterPack/
+</code></pre>
+</li>
+<li><p>Zrób mirror-push do nowego repozytorium.</p>
+<pre><code class="lang-git">$ cd stare-repo.git
+$ git push --mirror https://github.com/PolishDocs/nowe-repo.git
+</code></pre>
+</li>
+<li><p>Usuń tymczasowe lokalne repozytorium utworzone w kroku 1.</p>
+<pre><code class="lang-git">$ cd ..
+$ rm -rf Docs-StarterPack
+</code></pre>
+</li>
+<li><p>Następnie wejdź do nowego repozytorium i uruchom npm.</p>
+<pre><code class="lang-git">$ cd nowe-repo
+$ npm install
+</code></pre>
+</li>
+<li><p>Aby uruchomić preprocesory (Markdown, PugJS)</p>
+<pre><code class="lang-git">$ npm start
+</code></pre>
+</li>
+</ol>

@@ -1,3 +1,0 @@
-<h5>reduceRight</h5><div class="info"><pre><code>_.reduceRight(list, iteratee, [memo], [context]);</code></pre><span class="alias"><em>(Alias:&nbsp;<strong>foldr</strong>)</em></span></div><p>The right-associative version of reduce. Foldr is not as useful in JavaScript as it would be in a language with lazy evaluation.</p><pre><code>var list = [[0, 1], [2, 3], [4, 5]];
-var flat = _.reduceRight(list, function(a, b) { return a.concat(b); }, []);
-// returns [4, 5, 2, 3, 0, 1]</code></pre>

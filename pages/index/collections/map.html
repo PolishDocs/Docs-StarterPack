@@ -1,8 +1,0 @@
-<h5>map</h5><div class="info"><pre><code>_.map(list, iteratee, [context]);</code></pre><span class="alias"><em>(Alias:&nbsp;<strong>collect</strong>)</em></span></div><p>Produces a new array of values by mapping each value in list through a transformation function (iteratee). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire list.</p><pre><code>_.map([1, 2, 3], function(num){ return num * 3; });
-// returns [3, 6, 9]
-
-_.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
-// returns [3, 6, 9]
-
-_.map([[1, 2], [3, 4]], _.first);
-// returns [1, 3]</code></pre>
