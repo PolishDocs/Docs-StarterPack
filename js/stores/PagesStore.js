@@ -11,10 +11,11 @@ class PagesStore extends EventEmitter {
   }
 
   loadPages() {
+    console.log( window.location.origin + window.location.pathname );
     $.ajax({
       dataType: "json",
       method: "GET",
-      url: "/options/config.json",
+      url: `${window.location.origin}${window.location.pathname}/options/config.json`,
       beforeSend: (xhr, settings) => {
         xhr.url = settings.url; // eslint-disable-line no-param-reassign
       },
@@ -28,7 +29,7 @@ class PagesStore extends EventEmitter {
         pages: [],
       };
       if ( xhr.status !== 404 ) {
-        const url = `${window.location.origin}${xhr.url.replace(/^\.\//, "")}`;
+        const url = `${window.location.href}${xhr.url.replace(/^\.\//, "")}`;
         console.error( `GET ${url} ${xhr.status} (${thrownError})` );
       }
     });
@@ -43,7 +44,7 @@ class PagesStore extends EventEmitter {
           $.ajax({
             dataType: "html",
             method: "GET",
-            url: chapter.urlToDownload,
+            url: window.location.origin + window.location.pathname + chapter.urlToDownload,
             beforeSend: (xhr, settings) => {
               xhr.url = settings.url; // eslint-disable-line no-param-reassign
             },
@@ -56,7 +57,7 @@ class PagesStore extends EventEmitter {
           .fail((xhr, ajaxOptions, thrownError) => {
             chapter.isDownloaded = false;
             if ( xhr.status !== 404 ) {
-              const url = `${window.location.origin}${xhr.url.replace(/^\.\//, "")}`;
+              const url = `${window.location.href}${xhr.url.replace(/^\.\//, "")}`;
               console.error( `GET ${url} ${xhr.status} (${thrownError})` );
             }
           });
@@ -67,7 +68,7 @@ class PagesStore extends EventEmitter {
               $.ajax({
                 dataType: "html",
                 method: "GET",
-                url: subchapter.urlToDownload,
+                url: window.location.origin + window.location.pathname + subchapter.urlToDownload,
                 beforeSend: (xhr, settings) => {
                   xhr.url = settings.url; // eslint-disable-line no-param-reassign
                 },
@@ -80,7 +81,7 @@ class PagesStore extends EventEmitter {
               .fail((xhr, ajaxOptions, thrownError) => {
                 subchapter.isDownloaded = false;
                 if ( xhr.status !== 404 ) {
-                  const url = `${window.location.origin}${xhr.url.replace(/^\.\//, "")}`;
+                  const url = `${window.location.href}${xhr.url.replace(/^\.\//, "")}`;
                   console.error( `GET ${url} ${xhr.status} (${thrownError})` );
                 }
               });
