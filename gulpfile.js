@@ -166,4 +166,4 @@ gulp.task("watch-pages", () => {
 
 gulp.task("default", ["browserSync", "sass", "pug", "pug-pages", "markdown-pages", "js", "watch"]);
 
-gulp.task("pages", ["pug-pages", "markdown-pages", "watch-pages"]);
+gulp.task("pages", ["pug-pages", "pug", "markdown-pages", "watch-pages"]);
